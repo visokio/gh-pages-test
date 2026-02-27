@@ -9,7 +9,7 @@ On the [Omniscope download page](http://www.visokio.com/get/) you will find two 
 
 After the download - install the app (following instructions [here](https://help.visokio.com/support/solutions/folders/42000039433) if necessary) and start Omniscope by clicking on the blue Omniscope icon on your desktop.
 
-![Omniscope Welcome screen](images/getting-started-welcome.png)
+<img src="images/getting-started-welcome.png" alt="Omniscope Welcome screen" width="595">
 
 ## It is a web application - use any device to interact with it
 
@@ -19,7 +19,7 @@ All menus are touch friendly, allowing you to create and access reports on diffe
 
 Omniscope runs on Windows, Mac and Linux machines, and also on any web-enabled touchscreen device such as iPads, Android tablets and mobile phones.
 
-![Omniscope Workflow app](images/getting-started-workflow.png)
+<img src="images/getting-started-workflow.png" alt="Omniscope Workflow app" width="688">
 
 ## Get started - create a project
 
@@ -65,7 +65,7 @@ File Attributes is useful when doing file and report inventory, showing files, f
 
 **Connectors menu** uses publicly available or commercial API connectors for external data sources such as social media, advertising, financial data and others.
 
-![Building blocks menu](images/getting-started-blocks.png)
+<img src="images/getting-started-blocks.png" alt="Building blocks menu" width="700">
 
 All individual blocks contain a configuration tab and a data preview tab, notes, plus, in some cases, additional tabs with instructions or other information. After configuring the options on the first tab, you will need to press the 'Execute' button at the top of the block. This allows the data to flow through the block, undergo any defined actions, and then appear on the data preview tab, where you can examine the results.
 
@@ -117,7 +117,7 @@ Tip: deduplicate and remove blanks on both sides before merging.
 
 Connecting blocks is easy - you will see arrows on one or both sides of the blocks, which you can grab and drag to connect with other blocks. Data sources usually have output only, with the exception of the Database block and connectors, which may accept optional input parameters. The output of one block can be connected to multiple subsequent preparation blocks or reports.
 
-![Preparation tools](images/getting-started-preparation.png)
+<img src="images/getting-started-preparation.png" alt="Preparation tools" width="650">
 
 **Best practice tip 1**: whatever your data source - connect it to a Field Organiser block, where you can see a list of all fields and quickly eliminate unnecessary fields, correct data types, or rename fields.
 

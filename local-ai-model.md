@@ -63,7 +63,7 @@ All you will need to configure is the Endpoint base URL. For example, I've speci
 
 Now go to the Report Ninja integration settings and pick the model in the Default model drop-down.
 
-![Report Ninja model selection](images/local-ai-report-ninja.png)
+<img src="images/local-ai-report-ninja.png" alt="Report Ninja model selection" width="538">
 
 ## Try it out
 
