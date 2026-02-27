@@ -1,155 +1,148 @@
 ---
-title: Omniscope + Impala = Big Data Live Reports on Hadoop
+title: Omniscope + Impala = Big Data Live reports on Hadoop. (Step by step guide)
 breadcrumb: Big Data
 ---
 
-This article provides step-by-step guidance for setting up Apache Impala and configuring Omniscope to create interactive reports.
+This article is a step by step guide that will help you setting up Apache Impala and configure Omniscope to create an interactive report.
 
-**What this guide covers:**
+We will cover:
 
-1. Installing and running Impala
-2. Loading sample data on Hadoop filesystem (HDFS) with Omniscope
-3. Creating an Impala table from a CSV file on HDFS
-4. Connecting Omniscope to Impala
-5. Demonstrating an Omniscope report powered by Impala
+1. How to install and run Impala
+2. How to load sample data on Hadoop filesystem (HDFS) with Omniscope
+3. How to create an Impala table out of a CSV file on HDFS.
+4. How to connect Omniscope to Impala
+5. Demo an Omniscope report powered by Impala
 
-## Big Data Live
+### **Big data live**
 
-The combination of Omniscope and Impala enables big data visual analytics on your data sitting on Hadoop.
+The purpose of this powerful combination between Omniscope and Impala is to perform big data visual analytics on your data sitting on Hadoop.
 
-Apache Impala is an open source massively parallel processing (MPP) SQL query engine for data stored in a computer cluster running Apache Hadoop. Omniscope leverages Impala's query engine capabilities to analyse billions of rows with near instantaneous results in your Omniscope reports.
+Apache Impala is an open source massively parallel processing (MPP) SQL query engine for data stored in a computer cluster running Apache Hadoop.[[1]](https://en.wikipedia.org/wiki/Apache_Impala#cite_note-Apache_Impala-1)
 
-## 1. Set up Impala VM
+Omniscope is able to embrace Impala and exploit its great performance query engine so you can analyse billions of rows of data with near instantaneous results in your Omniscope reports.
 
-This section uses the free Cloudera Quickstart VM (single-node cluster) for testing. Users with existing Impala installations may skip this section.
+## **1. Set up Impala VM**
 
-### 1.1 Select VM platform and download image
+For this experiment we are going to use the free Cloudera Quickstart VM (single-node cluster), the easier way to test Cloudera CDH (Cloudera Distribution Hadoop) that bundles Apache Hadoop and related projects (e.g. Hive, Spark, Impala).
 
-Download from the [Cloudera Quickstart page](https://www.cloudera.com/downloads/quickstart_vms/5-12.html). Select your preferred VM platform (such as VirtualBox) and download the corresponding image.
+Of course if you already have Impala running you can skip this section.
 
-### 1.2 Configure VirtualBox VM and run QuickStart VM
+Refer to [Cloudera Quickstart Download page](https://www.cloudera.com/downloads/quickstart_vms/5-12.html) for system requirements and to download the VM image to run you single-node cluster.
 
-- Extract the downloaded zip file
-- Import the appliance into VirtualBox to create a new VM
+**1.1 Select your VM platform (e.g. VirtualBox) and download the image**
 
-**Recommended configuration before starting the VM:**
+![Cloudera Quickstart download page](images/impala-01.png)
 
-1. Set **6 CPUs** and **12GB of RAM** for smooth operation of Cloudera Manager, Hadoop, and Impala
-2. Change the network adapter setting to a **bridged connection**
+**1.2 Configure VirtualBox VM and run QuickStart VM**
 
-![VirtualBox VM configuration](images/impala-01.png)
+Extract the downloaded zip and Import appliance into VirtualBox to create a new VM.
 
-Once configured, run the Cloudera Quickstart VM.
+After the Import is done, before starting the VM I recommend to:
 
-### 1.3 Configure Cloudera CDH
+1) Set 6CPUs and **12GB** of Ram as required to run Cloudera Manager , Hadoop + Impala smoothly for this demo.
 
-When CentOS starts, the web browser should open to the Cloudera Live page displaying the cluster IP address.
+2) Change the Network adapter setting to have a **bridged** connection.
 
-To use Cloudera Manager for managing the single-node cluster:
-- Go to the VM desktop
-- Click the "Launch Cloudera Express" shortcut
-- Wait for services to initialise
+![VirtualBox VM configuration](images/impala-02.png)
 
-![Cloudera Manager](images/impala-02.png)
+Once all is configured, run the Cloudera Quickstart VM.
 
-> **Note:** You may need to "Deploy Client configuration" for the cluster and restart it to ensure all services run properly.
+**1.3 Configure Cloudera CDH**
 
-## 2. Load data on Hadoop filesystem (HDFS) with Omniscope
+When CentOS is up and running you should have the web browser open pointing to the Cloudera Live page showing your cluster IP address
 
-Omniscope reads and writes files from/to HDFS using the public WebHDFS API.
+![Cloudera Live page](images/impala-03.png)
 
-1. Create a new Omniscope project
-2. In the Workspace App, add a demo data block to generate sample data
-3. Add a File output block
-4. Configure the location to your HDFS filesystem
-5. Execute the block to publish a CSV file
+If you want to use Cloudera Manager to manage you single node cluster, go on the VM desktop, click the shortcut "Launch Cloudera Express" and wait for services to initialise.
 
-![Omniscope HDFS output configuration](images/impala-03.png)
+N.B. You may need to "Deploy Client configuration" for your cluster and restart the cluster to have all the services up and running.
 
-> **Important:** It is highly recommended to use the host name instead of the name node IP address.
+![Cloudera Manager](images/impala-04.png)
 
-Default credentials: username and password are `cloudera`.
+## **2. Load data on Hadoop filesystem (HDFS) with Omniscope**
 
-![HDFS file output](images/impala-04.png)
+Omniscope can read / write files from / to HDFS filesystem using the public WebHDFS API.
 
-**Verification:**
-- Add a File input block to the workspace
-- Verify that Omniscope can read data from HDFS
-- Go to the Data tab and confirm data readability from the HDFS filesystem
+Create a new Omniscope project, and in the Workspace App add a new Demo data blocks to write some sample data to HDFS.
 
-![Verifying HDFS data in Omniscope](images/impala-05.png)
+Then add a File output block, configure the location to your HDFS filesystem and Execute the block to publish a CSV file.
 
-## 3. Create Hive table from CSV file on HDFS
+![Omniscope HDFS output configuration](images/impala-05.png)
 
-1. Open Apache Hue
-2. Navigate to the Tables browser
-3. Select the `bondprices.csv` file
-4. Leave default settings
-5. Click "Next" to configure the table
+Please note that it is highly recommended to use the host name instead of the name node IP address.
 
-![Hue table browser](images/impala-06.png)
+N.B. default username and password is *cloudera*
 
-> **Important:** Date type is not supported by Impala at the time of writing, so date-related fields (issue date and maturity date) are created as String fields.
+To verify that the file has been written correctly you can add a File input block on the workspace and check Omniscope can read the data from it.
 
-![Table configuration in Hue](images/impala-07.png)
+![HDFS file input block](images/impala-06.png)
 
-Click "Submit" and wait for the job to create the `bondprices` database table.
+Go to the Data tab and verify data is readable from the HDFS filesystem.
 
-**Known issue:** There may be a Hue bug where the first column appears as `?category` instead of `category`. This requires manual correction using the Hive query editor:
+![HDFS data verification](images/impala-07.png)
 
-```sql
+## **3. Create Hive table from CSV file on HDFS**
+
+Open Apache Hue and navigate to the Tables browser, where you can create a database table out of the just created CSV file.
+
+Select the "bondprices.csv" file and leave default settings.
+
+![Hue Tables browser](images/impala-08.png)
+
+Click on "Next" to configure the table.
+
+Note that "date" type is not supported by Impala at the time of writing, so "issue date" and "maturity date" field will be created as String fields
+
+![Table configuration in Hue](images/impala-09.png)
+
+Click "Submit" and wait for the spawned job to create the "bondprices" database table.
+
+N.B. I guess there is a bug with Hue, the table resulted with the first column called "?category" rather than "category" so I had to alter the table using the Hive query editor and execute the following:
+
+```
 ALTER TABLE bondprices CHANGE `?category` `category` String
 ```
 
-![Hive query editor fix](images/impala-08.png)
+## **4. Connect Omniscope to Impala (JDBC)**
 
-## 4. Connect Omniscope to Impala (JDBC)
+Now that we have a sample table in Hive, queryable through Impala, we can configure Omniscope to connect to Impala.
 
-With a sample Hive table queryable through Impala, configure Omniscope to connect to Impala.
+In order to do so, we will add a *Database input* block on the Workspace, and configure and advanced JDBC connection.
 
-1. Add a Database input block to the Workspace
-2. Configure an advanced JDBC connection
+You will need to download the Impala **JDBC** drivers for Java 7+ . Follow instructions here [https://www.cloudera.com/downloads/connectors/impala/jdbc/2-5-5.html](https://www.cloudera.com/downloads/connectors/impala/jdbc/2-5-5.html)
 
-**Required:** Download Impala JDBC drivers for Java 7+ from [Cloudera](https://www.cloudera.com/downloads/connectors/impala/jdbc/2-5-5.html).
+Here I am using JDBC4 drivers, and my folder with jars looks like this:
 
-![Database block configuration](images/impala-09.png)
+![JDBC driver jars folder](images/impala-10.png)
 
-**Connection details:**
+Here is the Database input block configured in Omniscope:
 
-```
-Class:    com.cloudera.impala.jdbc41.Driver
-URL:      jdbc:impala://[yourhostname]:21050;AuthMech=3;UID=impala;PWD=cloudera;UseSasl=0
-Driver:   pathTo\impala-jdbc4 (Java7+) 2.5\
-Username: cloudera
-Password: cloudera
-```
+![Database input block configuration](images/impala-11.png)
 
-![JDBC connection settings](images/impala-10.png)
+Note that the **"Live query"** mode is enabled, so Omniscope can execute live queries to Impala without having to download data locally.
 
-**Enable "Live query" mode** — this allows Omniscope to execute live queries to Impala without having to download data locally.
+The configuration above is copied here for simplicity so you can copy it and paste it on your side:
 
-![Live query mode enabled](images/impala-11.png)
+*Class: com.cloudera.impala.jdbc41.Driver*
+*URL: jdbc:impala://[yourhostname]:21050;AuthMech=3; UID=impala;PWD=cloudera;UseSasl=0;*
+*Driver folder : pathTo\impala-jdbc4 (Java7+) 2.5\\*
+*Username cloudera*
+*Password cloudera*
 
-**Verification:**
-- Select the `bondprices` table
-- Go to the Data tab
-- Verify the connection works and Omniscope can query the table data
+Pick the "bondprices" table, go to the Data tab, and verify the connection is working and that Omniscope can query the table data.
 
 ![Impala query results in Omniscope](images/impala-12.png)
 
-## 5. Create Omniscope report powered by Impala
+## **5. Create Omniscope report powered by Impala**
 
-Back in the Workspace app:
+Back on the Workspace app, now just connect the Database block pointing to the Impala table to a Report block
 
-1. Connect the Database block (pointing to the Impala table) to a Report block
-2. A "bolt" icon on the database block indicates a live query connection to Impala
-3. Click the Report block to begin building the report
-4. Report views query data directly through Impala
+![Workspace with Report block](images/impala-13.png)
 
-![Live report powered by Impala](images/impala-13.png)
+Notice the "bolt" icon on the database block telling that there is a live query connection to Impala.
+
+Click then on the Report block to start building your report, which views will be querying data directly through Impala.
 
 ![Completed Impala-powered report](images/impala-14.png)
 
-## Resources
-
-A preconfigured IOZ file is available for download from the [original article](https://help.visokio.com/support/solutions/articles/42000036575-omniscope-impala-big-data-live-reports-on-hadoop-step-by-step-guide-), including write/read data to HDFS with a report powered by Impala.
+The original version of this article included a downloadable IOZ file preconfigured to write / read data to HDFS, with a Report powered by Impala. Please contact [support@visokio.com](mailto:support@visokio.com) if you need this file.

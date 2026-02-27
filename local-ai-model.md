@@ -1,93 +1,88 @@
 ---
-title: Using a Local AI Model
+title: Using a local AI model
 breadcrumb: AI
 ---
 
-Omniscope Evo with an Enterprise licence lets you configure OpenAI-compatible providers (LLM inference engines providing an OpenAI-compatible chat completions endpoint).
+Omniscope Evo with an Enterprise licence now lets you configure OpenAI-compatible providers (namely, LLM inference engines providing an OpenAI compatible chat completions endpoint).
 
-Many models, variants, and providers are available for running locally on laptops, on-premises servers, or self-hosted private clouds. This article focuses on one example: **llama.cpp** on a **MacBook Pro M2** running **Qwen_QwQ-32B-Q4_K_M.gguf**.
+There are many models, model variants/quantisations and providers available for running locally on your laptop, on prem in a company server, or self-hosted on a private cloud. This article focuses on a single simple example: **llama.cpp** on a **MacBook Pro M2** (or similar/later) running **Qwen_QwQ-32B-Q4_K_M.gguf**.
+
+For other providers or environments, consult the provider
 
 ## Install llama.cpp
 
-**llama.cpp** supports CPU-only and GPU-accelerated AI models in GGUF format, available under the "Quantizations" section on huggingface.co. This enables larger models to run on smaller hardware.
+The excellent [Llama.cpp](https://github.com/ggml-org/llama.cpp/) supports CPU-only, and GPU accelerated (Apple Silicon is a first-class example) AI models in the gguf format as widely available under the "Quantizations" section for a given model on [huggingface.co](https://huggingface.co) (allowing much larger models to be run on smaller commodity hardware).
 
-On Mac (such as MacBook Pro M2 with 32GB memory), install llama.cpp using brew:
+On a Mac (such as a MacBook Pro M2 with 32gb memory), install llama.cpp following their [instructions](https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md). We recommend using brew:
 
-```bash
-brew install llama.cpp
-```
+`brew install llama.cpp`
 
 ## Download a model
 
-Visit huggingface.co and find your desired model. For example: [https://huggingface.co/Qwen/QwQ-32B](https://huggingface.co/Qwen/QwQ-32B).
+Visit [huggingface.co](https://huggingface.co) and find the model you want. For example today I'm playing with [https://huggingface.co/Qwen/QwQ-32B](https://huggingface.co/Qwen/QwQ-32B).
 
-Follow the Quantizations section on the right. Select the **q4_k_m** variant if unsure. For this example:
+On the right, follow the Quantizations section. Typically there'll be several people offering these. You can usually pick the top one. Bartowski or Unsloth are good bets, but in this cases, Qwen themselves provide the top choice: [https://huggingface.co/Qwen/QwQ-32B-GGUF](https://huggingface.co/Qwen/QwQ-32B-GGUF)
 
-```
-qwq-32b-q4_k_m.gguf
-```
+Under "Files and versions", pick the .gguf file you want. If unsure, pick the q4_k_m variant. In this case it's:
 
-This is a 32 billion parameter model, quantized to approximately 4.8 bits per weight. The file is approximately 20GB.
+`qwq-32b-q4_k_m.gguf`
+
+(meaning a 32 billion parameter model, quantized to approx. 4.8 bits per weight).
+
+It's a big file. This example is 20gb.
 
 ## Run the model
 
-In Terminal, adapt and run:
+In Terminal, run the following, adapted as required:
 
-```bash
-llama-server --port 8081 -m models/qwq-32b-q4_k_m.gguf
+`llama-server --port 8081 -m models/qwq-32b-q4_k_m.gguf`
+
+### Windows users with NVIDIA gpu
+
+On Windows, wth a NVIDIA GPU, llama.cpp does not automatically use the GPU like it does on macOS, so you must enable CUDA and explicitly offload the model to the GPU.
+
+First, download or build a CUDA-enabled llama.cpp (look for llama-server.exe or llama-cli.exe built with GGML_CUDA=ON). Place your .gguf model locally, then run it with flags that control GPU usage and memory.
+
+The key parameter is ***--gpu-layers***, which tells llama.cpp how many transformer layers to load into VRAM (use a high value like 999 to offload everything that fits).
+Use -c to set the context size (start with 4096, increase only if you have spare VRAM).
+A typical Windows command looks like:
+
 ```
-
-### Windows users with NVIDIA GPU
-
-On Windows with an NVIDIA GPU, llama.cpp does not automatically use GPU acceleration like macOS, requiring explicit enablement.
-
-Download or build a CUDA-enabled llama.cpp (`llama-server.exe` built with `GGML_CUDA=ON`). Place your .gguf model locally, then run with GPU control flags.
-
-The key parameter is `--gpu-layers`, controlling how many transformer layers load into VRAM (use high values like 999 to offload everything that fits). Use `-c` for context size (start with 4096).
-
-A typical Windows command:
-
-```bash
 llama-server -m models\model.gguf --gpu-layers 999 -c 4096 --port 8081
 ```
 
-If CUDA works, startup logs show GPU offloading. The `nvidia-smi` command displays VRAM usage. Omitting `--gpu-layers` runs mostly on CPU, which is much slower.
-
-> GPU acceleration is essential for sufficient response times.
+If CUDA is working, the startup log will say it is offloading layers to GPU, and if you have an NVIDIA GPU, the *nvidia-smi* command will show VRAM usage. If --gpu-layers is omitted or set to 0, the model will run mostly on CPU and be much slower.
 
 ## Configure Omniscope
 
-Following the introduction in [How to Enable AI in Omniscope](enable-ai.md), go to AI Settings and add a **Custom** provider. Enterprise licence required; contact support@visokio.com for trials.
+Following on from the introduction in [How to enable AI in Omniscope](enable-ai.md), go back into AI Settings in Omniscope, and add a Custom provider. You'll need an Enterprise licence; contact support@visokio.com for a trial.
 
-Configure the Endpoint base URL. For port 8081 on the same machine:
-
-```
-http://127.0.0.1:8081/
-```
+All you will need to configure is the Endpoint base URL. For example, I've specified port 8081 above (the default is 8080) and so the base URL when running llama.cpp on the same machine as Omniscope will be `http://127.0.0.1:8080/` as shown here:
 
 ![Custom provider configuration](images/local-ai-config.png)
 
-Then select the model in Report Ninja integration settings' Default model dropdown.
+Now go to the Report Ninja integration settings and pick the model in the Default model drop-down.
 
 ![Report Ninja model selection](images/local-ai-report-ninja.png)
 
 ## Try it out
 
-Use Instant Dashboard on the home page to upload a data file and view a dashboard.
+Now try using Instant Dashboard on the home page, to upload a data file and see a dashboard.
 
 ![Dashboard generated by local AI](images/local-ai-dashboard.png)
 
-> **Note:** Large local 32B models are not "instant" and may require one or more minutes to respond. Increase the Custom provider Advanced settings response timeout if needed.
+Note: large local models like 32B ones are not very "instant" and can take a minute or more to respond. You may need to go to the Custom provider Advanced settings and increase the response timeout.
 
 ## Performance
 
-For poor performance, try smaller models like `DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf` (faster but less capable) or use newer, faster hardware like the latest MacBook Pro.
+If performance is poor, try smaller models such as `DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf`, which is less capable and more likely to misunderstand you, or not understand the Omniscope dashboard completely, but is much faster. Also consider using a newer, faster machine, such as the latest Macbook Pro.
 
 ![Performance comparison](images/local-ai-performance.png)
 
 ## Caveats
 
-- Local models are typically only compatible with Report Ninja
-- The AI Block and Custom SQL typically require real OpenAI models rather than OpenAI-compatible alternatives
-- Smaller models will not work sufficiently to be useful
-- GPU acceleration is essential for adequate response times
+Local models are typically only compatible with Report Ninja. The AI Block and Custom SQL typically require real OpenAI models rather than OpenAI-compatible models.
+
+Smaller models will not work sufficiently to be useful.
+
+GPU acceleration is essential for sufficient response times.

@@ -1,82 +1,81 @@
 ---
-title: How to Enable AI in Omniscope
+title: How to enable AI in Omniscope
 breadcrumb: AI
 ---
 
-Omniscope integrates AI capabilities in various places, but they are not enabled by default and need some configuration steps.
+Omniscope integrates AI capabilities in various places, but they are not enabled by default and need some configuration steps, as follows.
 
-## 1. Enable Labs features
+## Enabling labs features
 
-Certain AI settings require Labs features to be activated. For instance, **Report Ninja** needs to be enabled. Navigate to **Admin > Labs** and check the "Report Ninja" option, then save and reload the page.
+Some AI settings require particular labs features to be enabled. For example, **Report Ninja**. Go to "Admin > Labs" and tick "Report Ninja". Save, then reload the page.
 
-![Enable Report Ninja in Labs](images/enable-ai-labs.png)
+## Finding AI settings
 
-## 2. Find AI Settings
+Omniscope AI settings are configurable and customisable at the folder level, currently within the **Create/Edit Permissions dialog**, available from the corner in the folder list page:
 
-Omniscope's AI configurations are adjustable at the folder level within the **Create/Edit Permissions dialog**, accessible from the corner menu in the folder list page.
-
-For convenience, root folder AI settings (applying server-wide if subfolders don't override them) can be accessed via **Admin > AI Settings**.
+![Folder list corner menu](images/enable-ai-labs.png)
 
 ![AI Settings location](images/enable-ai-settings.png)
 
-## 3. AI Settings overview
+For convenience, you can also access the root folder's AI settings (which will apply server-wide if no subfolders override them) from "Admin > AI Settings".
 
-The AI settings dialog includes two primary components:
+## AI Settings
+
+The AI settings dialog/section will appear somewhat like this:
 
 ![AI Settings dialog](images/enable-ai-providers.png)
 
-**Providers** are large language model services that Omniscope connects to for AI tasks. Common options include OpenAI, Azure OpenAI, or custom OpenAI-compatible providers like local models via llama.cpp. Commercial providers require API keys and may need paid subscriptions.
+AI settings comprise two main concepts:
 
-**Integrations** are Omniscope features utilising AI capabilities. Currently there are six: Report Ninja, Workflow Ninja, Data Q&A View, AI Block, Custom SQL, and Workflow Executions.
+- **Providers** are services with large language models (LLMs) that Omniscope connects to, in order to perform AI tasks. Currently you are most likely to be using OpenAI, but can use Azure OpenAI or a Custom provider that is OpenAI-compatible, such as a local model via llama.cpp. Commercial providers such as OpenAI require an API key and may require a paid subscription.
+- **Integrations** are aspects of Omniscope that take advantage of AI capabilities. There are currently 6 such cases: Report Ninja, Workflow Ninja, Data Q&A View, AI Block, Custom SQL and Workflow Executions.
 
-Configuration can be folder-specific or inherited from parent folders. Administrators can restrict subfolders from overriding settings to enforce organisational AI policies.
+The set of providers, and each integration, can be separately configured in a given folder, or allowed to inherit from the parent folder. You can also restrict subfolders from overriding the configuration defined at a given level, as a way of applying a policy to control AI use on a given server.
 
-## 4. Set up a provider
+### Providers
 
-By default, no providers exist, preventing AI feature usage. Most users start with OpenAI:
+By default there won't be any providers, so you won't be able to use AI features. You will typically need to sign up for an account at [https://platform.openai.com/](https://platform.openai.com/), and go to "Settings > API keys", create an All-permissions key, and then come back to Omniscope. Add an OpenAI provider and enter the API key.
 
-1. Visit [https://platform.openai.com/](https://platform.openai.com/)
-2. Navigate to **Settings > API keys**
-3. Create an all-permissions key
+![OpenAI provider settings](images/enable-ai-openai-key.png)
 
-![OpenAI API key creation](images/enable-ai-openai-key.png)
+You don't need to touch any other settings.
 
-4. Return to Omniscope and add an OpenAI provider with the API key
+Alternatively, if you have a local / on-prem / other OpenAI-compatible provider, configure it by adding a "Custom" provider. This is beyond the scope of this article, and requires an Enterprise licence.
 
-![Add provider in Omniscope](images/enable-ai-add-provider.png)
+See [Using a local AI model](local-ai-model.md) or [Setting up an Azure OpenAI provider](https://help.visokio.com/support/solutions/articles/42000112990-setting-up-an-azure-openai-provider).
 
-No additional settings are necessary.
+### Integrations: Report Ninja
 
-For on-premises or OpenAI-compatible alternatives, configure a "Custom" provider (Enterprise licence required). See [Using a Local AI Model](local-ai-model.md) for details.
+Integrations are enabled by default, but will only come to life when you've configured a provider (above), and, currently, have also chosen a Default model. For example here for Report Ninja, we've chosen gpt-4o-mini, a very cost-effective option and surprisingly capable model.
 
-## 5. Configure integrations
+![Report Ninja integration settings](images/enable-ai-add-provider.png)
 
-Integrations are enabled by default but require a configured provider and selected default model.
+You can pick other models. Note that the costs shown are a snapshot and may not be correct at a given time. Models that are known to be incompatible are excluded from the list. New models Omniscope does not recognise will show up marked as "unknown". If you choose an unknown model, it may not work correctly.
 
-For Report Ninja, **gpt-4o-mini** is a cost-effective and capable option. **gpt-4o** and **o3-mini** also work well.
+![Model selection list](images/enable-ai-report-ninja.png)
 
-![Report Ninja configuration](images/enable-ai-report-ninja.png)
+You will now see Instant Dashboard appear in the "Create project" section, and can use Instant Dashboard report preset in the Workflow "Add block" menu. And for any existing report, you can use the corner menu "Ask Report Ninja" to access it, and get an assistant that helps, suggests, answers questions and edits your dashboard:
 
-Once configured, "Instant Dashboard" appears in the "Create project" section and becomes available as a Workflow preset. Existing reports can access Report Ninja via the corner menu "Ask Report Ninja," providing assistance with suggestions, questions, and edits.
+![Report Ninja in action](images/enable-ai-integrations.png)
 
-## Available AI integrations
+Report Ninja works well with gpt-4o-mini, gpt-4o, and o3-mini from OpenAI, and also with some larger local models such as DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf via llama.cpp on a MacBook Pro M2 or better, although there are many possibilities in terms of providers and models.
 
-![AI integrations overview](images/enable-ai-integrations.png)
+### Other integrations
 
-**Report Ninja** — Assists with dashboard creation and editing.
+The **Workflow Ninja** helps you understand and explain complex workflows - showing how fields flow and how data is transformed. Answers are enhanced with diagrams and block links that highlight the relevant block.
 
-**Workflow Ninja** — Explains complex workflows, displaying data flow and transformations with diagrams and block links.
+The **Data Q&A View** lets editors and viewers ask natural language questions across multiple data sources. It uses Omniscope to query and analyse the data, returning answers supported by diagrams, interim results and explanations.
 
-**Data Q&A View** — Enables natural language queries across multiple data sources, returning answers with diagrams and explanations.
+The **AI Block** integration lets you create custom workflow sources/operations/outputs using Python code written by the AI in response to your questions and instructions. Works particularly well with o3-mini.
 
-**AI Block** — Creates custom workflow operations using AI-generated Python code responding to instructions.
+The **Custom SQL** integration allows you to write a natural language query and automatically generate the SQL query. Find this after enabling this integration in the Database block Options tab upon choosing Custom SQL.
 
-**Custom SQL** — Generates SQL queries from natural language, available in Database block Options after enabling this integration.
+The **Workflow Executions** integration provide AI assistance in workflow executions. The AI Completion block is one such example, which can be used to generate, transform, or analyse text.
 
-**Workflow Executions** — Provides AI assistance in executions, including the AI Completion block for text generation and transformation.
+## Settings wrap-up
 
-## Summary
+That's it. To summarise:
 
-1. Enable the Report Ninja feature flag in Admin > Labs (if required)
-2. Add a provider with an API key (typically OpenAI)
-3. Select a default model (e.g. gpt-4o-mini) in integration settings
+1. Enable the feature flag Report Ninja (if required).
+2. Add a provider, typically OpenAI, and an API key.
+3. In (e.g.) Report Ninja integration settings, choose a default model such as gpt-4o.

@@ -6,19 +6,19 @@ Welcome to the Omniscope product documentation.
 
 ## Getting Started
 
-- [Getting Started - Create a New Omniscope Project](getting-started.md)
+- [Getting Started - create a new Omniscope project](getting-started.md)
 
 ## Installation & Deployment
 
 - [Linux Installation](linux-installation.md)
 - [Running Omniscope Fully In-Memory (Processing + Reporting)](running-in-memory.md)
-- [Concurrent Workflow Jobs Execution](concurrent-workflow-jobs.md)
+- [Concurrent Workflow jobs execution](concurrent-workflow-jobs.md)
 
 ## AI
 
-- [How to Enable AI in Omniscope](enable-ai.md)
-- [Using a Local AI Model](local-ai-model.md)
+- [How to enable AI in Omniscope](enable-ai.md)
+- [Using a local AI model](local-ai-model.md)
 
 ## Big Data
 
-- [Omniscope + Impala = Big Data Live Reports on Hadoop](omniscope-impala-big-data.md)
+- [Omniscope + Impala = Big Data Live reports on Hadoop](omniscope-impala-big-data.md)

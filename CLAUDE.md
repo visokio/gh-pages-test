@@ -90,13 +90,13 @@ New categories can be added as `## Heading` sections in `index.md`.
 ### Current articles
 | File | Title | Category |
 |------|-------|----------|
-| `getting-started.md` | Getting Started - Create a New Omniscope Project | Getting Started |
+| `getting-started.md` | Getting Started - create a new Omniscope project | Getting Started |
 | `linux-installation.md` | Linux Installation | Installation & Deployment |
-| `running-in-memory.md` | Running Omniscope Fully In-Memory | Installation & Deployment |
-| `concurrent-workflow-jobs.md` | Concurrent Workflow Jobs Execution | Installation & Deployment |
-| `enable-ai.md` | How to Enable AI in Omniscope | AI |
-| `local-ai-model.md` | Using a Local AI Model | AI |
-| `omniscope-impala-big-data.md` | Omniscope + Impala = Big Data Live Reports on Hadoop | Big Data |
+| `running-in-memory.md` | Running Omniscope Fully In-Memory (Processing + Reporting) | Installation & Deployment |
+| `concurrent-workflow-jobs.md` | Concurrent Workflow jobs execution | Installation & Deployment |
+| `enable-ai.md` | How to enable AI in Omniscope | AI |
+| `local-ai-model.md` | Using a local AI model | AI |
+| `omniscope-impala-big-data.md` | Omniscope + Impala = Big Data Live reports on Hadoop. (Step by step guide) | Big Data |
 
 ### Image naming convention
 Images are stored in `images/` with descriptive names prefixed by article:
@@ -108,6 +108,16 @@ Images are stored in `images/` with descriptive names prefixed by article:
 ### Content rules
 - **Real content only** — never use placeholder or faked content
 - **Port from the original help site** where articles exist there
+- **Faithful porting** — when converting from the original help site, preserve
+  the exact words, sentences, and structure. Do not rephrase, summarise, or
+  "improve" the content during conversion. The task is to create equivalent
+  Markdown from the source HTML, not to rewrite it. Content improvements are
+  done deliberately as a separate pass, never during the initial port.
+- **How to port:** Fetch the raw HTML of the original page (e.g. `curl -sL`),
+  then convert the article body HTML to Markdown manually — do not use an AI
+  summariser to "extract" content, as it will rephrase. Preserve paragraph
+  breaks, heading levels, bold/italic, lists, code blocks, blockquotes,
+  tables, image positions, and link targets exactly as they appear.
 - Heading levels in articles start at `##` (h2), since `# Title` (h1) is
   rendered automatically from front matter by the page layout
 - Links to other KB articles use relative `.md` paths: `[link](other.md)`
