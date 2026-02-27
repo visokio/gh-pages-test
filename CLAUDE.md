@@ -1,5 +1,20 @@
 # Omniscope Knowledge Base — Project Guide
 
+## On session start
+
+Immediately start the local Jekyll preview server so the user can browse
+at http://localhost:14000 while we work:
+
+```bash
+bundle install --quiet 2>&1 | tail -1
+bundle exec jekyll build
+bundle exec jekyll serve --host 0.0.0.0 --port 4000 --detach --skip-initial-build
+```
+
+Tell the user the preview is ready at **http://localhost:14000**.
+
+---
+
 This is the Omniscope product knowledge base, hosted on GitHub Pages.
 
 - **Repo:** `visokio/gh-pages-test`
