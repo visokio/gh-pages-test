@@ -118,6 +118,16 @@ Images are stored in `images/` with descriptive names prefixed by article:
   summariser to "extract" content, as it will rephrase. Preserve paragraph
   breaks, heading levels, bold/italic, lists, code blocks, blockquotes,
   tables, image positions, and link targets exactly as they appear.
+- **Image sizing** — original help site images are often high-res (retina/2x)
+  and have inline `style="width: Npx"` in the HTML. When porting, check each
+  `<img>` tag for a width style. If present, use an HTML img tag instead of
+  markdown image syntax to preserve the display size:
+  ```html
+  <img src="images/my-image.png" alt="Description" width="530">
+  ```
+  If the original has `width: auto` or no width style, standard markdown
+  `![alt](src)` is fine. Without this, retina images blow up to full content
+  width and look oversized.
 - Heading levels in articles start at `##` (h2), since `# Title` (h1) is
   rendered automatically from front matter by the page layout
 - Links to other KB articles use relative `.md` paths: `[link](other.md)`
