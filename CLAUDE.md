@@ -6,7 +6,6 @@ Immediately start the local Jekyll preview server so the user can browse
 at http://localhost:14000 while we work:
 
 ```bash
-bundle install --quiet 2>&1 | tail -1
 bundle exec jekyll build
 bundle exec jekyll serve --host 0.0.0.0 --port 4000 --detach --skip-initial-build
 ```
@@ -121,10 +120,9 @@ Images are stored in `images/` with descriptive names prefixed by article:
 - **Local preview** with Jekyll for iteration without burning builds
 
 ### Local preview
-The container has Ruby, Bundler, and Chromium baked in. On each session:
+The container has Ruby, Bundler, Chromium, and all gems baked in. On each session:
 
 ```bash
-bundle install                 # install gems (fast if cached)
 bundle exec jekyll build       # build the site
 bundle exec jekyll serve --host 0.0.0.0 --port 4000 --detach --skip-initial-build
 ```
