@@ -1,12 +1,7 @@
 ---
 title: Concurrent Workflow Jobs Execution
+breadcrumb: Installation & Deployment
 ---
-
-[Home](index.md) | [Getting Started](getting-started.md) | [Linux Installation](linux-installation.md) | [Enable AI](enable-ai.md) | [Local AI Model](local-ai-model.md) | [Impala + Big Data](omniscope-impala-big-data.md) | [In-Memory](running-in-memory.md)
-
----
-
-# Concurrent Workflow Jobs Execution
 
 ## Default behaviour
 

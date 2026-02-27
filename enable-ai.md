@@ -1,12 +1,7 @@
 ---
 title: How to Enable AI in Omniscope
+breadcrumb: AI
 ---
-
-[Home](index.md) | [Getting Started](getting-started.md) | [Linux Installation](linux-installation.md) | [Local AI Model](local-ai-model.md) | [Impala + Big Data](omniscope-impala-big-data.md) | [Concurrent Jobs](concurrent-workflow-jobs.md) | [In-Memory](running-in-memory.md)
-
----
-
-# How to Enable AI in Omniscope
 
 Omniscope integrates AI capabilities in various places, but they are not enabled by default and need some configuration steps.
 

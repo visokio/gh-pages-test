@@ -1,12 +1,7 @@
 ---
 title: Omniscope + Impala = Big Data Live Reports on Hadoop
+breadcrumb: Big Data
 ---
-
-[Home](index.md) | [Getting Started](getting-started.md) | [Linux Installation](linux-installation.md) | [Enable AI](enable-ai.md) | [Local AI Model](local-ai-model.md) | [Concurrent Jobs](concurrent-workflow-jobs.md) | [In-Memory](running-in-memory.md)
-
----
-
-# Omniscope + Impala = Big Data Live Reports on Hadoop
 
 This article provides step-by-step guidance for setting up Apache Impala and configuring Omniscope to create interactive reports.
 

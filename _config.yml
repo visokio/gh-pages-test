@@ -2,3 +2,8 @@ theme: minima
 title: Omniscope Knowledge Base
 description: Product documentation for Omniscope by Visokio
 header_pages: []
+exclude:
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - README.md

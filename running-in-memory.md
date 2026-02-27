@@ -1,12 +1,7 @@
 ---
 title: Running Omniscope Fully In-Memory (Processing + Reporting)
+breadcrumb: Installation & Deployment
 ---
-
-[Home](index.md) | [Getting Started](getting-started.md) | [Linux Installation](linux-installation.md) | [Enable AI](enable-ai.md) | [Local AI Model](local-ai-model.md) | [Impala + Big Data](omniscope-impala-big-data.md) | [Concurrent Jobs](concurrent-workflow-jobs.md)
-
----
-
-# Running Omniscope Fully In-Memory (Processing + Reporting)
 
 Omniscope can now operate with both its processing and reporting layers running entirely in memory.
 

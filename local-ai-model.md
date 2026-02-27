@@ -1,12 +1,7 @@
 ---
 title: Using a Local AI Model
+breadcrumb: AI
 ---
-
-[Home](index.md) | [Getting Started](getting-started.md) | [Linux Installation](linux-installation.md) | [Enable AI](enable-ai.md) | [Impala + Big Data](omniscope-impala-big-data.md) | [Concurrent Jobs](concurrent-workflow-jobs.md) | [In-Memory](running-in-memory.md)
-
----
-
-# Using a Local AI Model
 
 Omniscope Evo with an Enterprise licence lets you configure OpenAI-compatible providers (LLM inference engines providing an OpenAI-compatible chat completions endpoint).
 

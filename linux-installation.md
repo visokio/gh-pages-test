@@ -1,12 +1,7 @@
 ---
 title: Linux Installation
+breadcrumb: Installation & Deployment
 ---
-
-[Home](index.md) | [Getting Started](getting-started.md) | [Enable AI](enable-ai.md) | [Local AI Model](local-ai-model.md) | [Impala + Big Data](omniscope-impala-big-data.md) | [Concurrent Jobs](concurrent-workflow-jobs.md) | [In-Memory](running-in-memory.md)
-
----
-
-# Linux Installation
 
 ## Installing using a cloud marketplace
 

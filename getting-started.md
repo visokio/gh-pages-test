@@ -1,12 +1,7 @@
 ---
 title: Getting Started - Create a New Omniscope Project
+breadcrumb: Getting Started
 ---
-
-[Home](index.md) | [Linux Installation](linux-installation.md) | [Enable AI](enable-ai.md) | [Local AI Model](local-ai-model.md) | [Impala + Big Data](omniscope-impala-big-data.md) | [Concurrent Jobs](concurrent-workflow-jobs.md) | [In-Memory](running-in-memory.md)
-
----
-
-# Getting Started - Create a New Omniscope Project
 
 ## Download and install the app
 
