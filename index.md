@@ -2,8 +2,6 @@
 title: Omniscope Knowledge Base
 ---
 
-# Omniscope Knowledge Base
-
 Welcome to the Omniscope product documentation.
 
 ## Getting Started
